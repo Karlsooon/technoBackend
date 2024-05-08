@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 import java.util.List;
 
 @Entity
-@Table(name = "tag", schema = "schema_techno")
+@Table(name = "tag")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
