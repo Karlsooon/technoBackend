@@ -1,5 +1,17 @@
-FROM eclipse-temurin:17-jdk-alpine
-VOLUME /tmp
-COPY build/libs/*.jar app.jar
-ENTRYPOINT ["java","-jar","/app.jar"]
+FROM gradle:jdk17 as builder
+
+WORKDIR /app
+
+COPY . /app
+
+RUN gradle bootJar --no-daemon
+
+FROM openjdk:17
+
 EXPOSE 8080
+
+WORKDIR /app
+
+COPY --from=builder /app/build/libs/*.jar /app/app.jar
+
+CMD ["java", "-jar", "app.jar"]

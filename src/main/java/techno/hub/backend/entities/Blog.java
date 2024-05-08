@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
-@Table(name = "blog", schema = "schema_techno")
+@Table(name = "blog")
 @Data
 @Getter
 @Setter
@@ -37,7 +37,7 @@ public class Blog {
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
-            name = "blog_tag", schema = "schema_techno",
+            name = "blog_tag",
             joinColumns = @JoinColumn(name = "blog_id"),
             inverseJoinColumns = @JoinColumn(name = "tag_id")
     )

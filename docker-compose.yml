@@ -2,17 +2,18 @@ version: "3.8"
 
 services:
   postgres:
-    container_name: technoparkweb-postgres
+    container_name: postgres
     image: postgres
     environment:
       POSTGRES_USER: k_app
       POSTGRES_PASSWORD: 123
       POSTGRES_DB: technoparkweb
     ports:
-      - "5432:5432"
+      - "9001:5432"
+    volumes:
+      - db-data:/var/lib/postgresql/data
     restart: unless-stopped
   keycloak:
-#    image: jboss/keycloak
     image: sleighzy/keycloak
     container_name: technoparkweb-keycloak
     environment:
@@ -24,22 +25,23 @@ services:
       KEYCLOAK_USER: admin
       KEYCLOAK_PASSWORD: admin_password
     ports:
-      - "8484:8080"
+      - "9002:8080"
     depends_on:
       - postgres
     links:
       - "postgres:postgres"
-
-#  your-app:
-#    build:
-#      context: .
-#      dockerfile: Dockerfile
-#    container_name: technoparkweb-app
-#    environment:
-#      DATABASE_DOMAIN: postgres
-#      DATABASE_PORT: 5432
-#    ports:
-#        - "8080:8000"
-#    depends_on:
-#        - postgres
-#        - keycloak
+  your-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: technoparkweb-app
+    environment:
+      DATABASE_DOMAIN: postgres
+      DATABASE_PORT: 5432
+    ports:
+      - "9000:8080"
+    depends_on:
+      - postgres
+      - keycloak
+volumes:
+  db-data:
