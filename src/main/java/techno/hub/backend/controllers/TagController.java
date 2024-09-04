@@ -1,6 +1,7 @@
 package techno.hub.backend.controllers;
 
 import lombok.extern.slf4j.Slf4j;
+import org.apache.catalina.core.ApplicationContext;
 import techno.hub.backend.dtos.CreateTagDto;
 import techno.hub.backend.dtos.TagDto;
 import techno.hub.backend.services.TagService;
@@ -10,7 +11,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -41,8 +41,7 @@ public class TagController {
 
     @PostMapping("/create")
     public ResponseEntity<TagDto> createTag(@RequestBody CreateTagDto tag) {
-        var token = (JwtAuthenticationToken) SecurityContextHolder.getContext().getAuthentication();
-        tag.setAuthorId(token.getName());
+        tag.setAuthorId(SecurityContextHolder.getContext().getAuthentication().getName());
         var createdTag = tagService.createTag(tag);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdTag);
     }
