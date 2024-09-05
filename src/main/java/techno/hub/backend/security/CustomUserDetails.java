@@ -1,27 +1,22 @@
 package techno.hub.backend.security;
 
-import io.jsonwebtoken.Claims;
-import lombok.Getter;
+import lombok.AllArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 
-public class UserPrincipal implements UserDetails {
+@AllArgsConstructor
+public class CustomUserDetails implements UserDetails {
     private final User user;
-
-    @Getter
-    private final Claims claims;
-
-    public UserPrincipal(User user, Claims claims) {
-        this.user = user;
-        this.claims = claims;
-    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return user.getAuthorities();
+        return user.getAuthorities().stream().map(
+                role -> new SimpleGrantedAuthority("ROLE_" + role.getAuthority())
+        ).toList();
     }
 
     @Override
@@ -36,21 +31,22 @@ public class UserPrincipal implements UserDetails {
 
     @Override
     public boolean isAccountNonExpired() {
-        return user.isAccountNonExpired();
+        return true;
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return user.isAccountNonLocked();
+        return true;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return user.isCredentialsNonExpired();
+        return true;
     }
 
     @Override
     public boolean isEnabled() {
-        return user.isEnabled();
+        return true;
     }
 }
+

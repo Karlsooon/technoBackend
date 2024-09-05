@@ -1,6 +1,9 @@
 HELP.md
 
-
+/build
+build
+.gradle
+/gradle
 ### STS ###
 .apt_generated
 .classpath

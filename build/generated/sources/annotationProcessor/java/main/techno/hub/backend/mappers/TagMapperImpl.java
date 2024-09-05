@@ -9,8 +9,8 @@ import techno.hub.backend.entities.Tag;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2023-12-18T19:24:39+0600",
-    comments = "version: 1.5.3.Final, compiler: IncrementalProcessingEnvironment from gradle-language-java-8.2.1.jar, environment: Java 19.0.1 (Oracle Corporation)"
+    date = "2024-09-04T22:09:46+0500",
+    comments = "version: 1.5.3.Final, compiler: IncrementalProcessingEnvironment from gradle-language-java-8.2.1.jar, environment: Java 17.0.10 (BellSoft)"
 )
 @Component
 public class TagMapperImpl implements TagMapper {

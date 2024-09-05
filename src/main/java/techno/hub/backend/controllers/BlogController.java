@@ -7,7 +7,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import techno.hub.backend.dtos.BlogCreateRequestDto;
@@ -45,9 +44,9 @@ public class BlogController {
 
     @PostMapping(value = "/create", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<BlogDto> createBlog(@Valid final BlogCreateRequestDto model, @RequestPart(name = "file") MultipartFile file) {
-        var token = (JwtAuthenticationToken) SecurityContextHolder.getContext().getAuthentication();
 
-        var result = blogService.saveBlog(model, file, token.getName());
+
+        var result = blogService.saveBlog(model, file, SecurityContextHolder.getContext().getAuthentication().getName());
         return ResponseEntity.status(HttpStatus.CREATED).body(result);
     }
 

@@ -13,23 +13,6 @@ services:
     volumes:
       - db-data:/var/lib/postgresql/data
     restart: unless-stopped
-  keycloak:
-    image: sleighzy/keycloak
-    container_name: technoparkweb-keycloak
-    environment:
-      DB_VENDOR: POSTGRES
-      DB_ADDR: postgres
-      DB_DATABASE: technoparkweb
-      DB_USER: k_app
-      DB_PASSWORD: 123
-      KEYCLOAK_USER: admin
-      KEYCLOAK_PASSWORD: admin_password
-    ports:
-      - "9002:8080"
-    depends_on:
-      - postgres
-    links:
-      - "postgres:postgres"
   your-app:
     build:
       context: .
@@ -42,6 +25,5 @@ services:
       - "9000:8080"
     depends_on:
       - postgres
-      - keycloak
 volumes:
   db-data:
