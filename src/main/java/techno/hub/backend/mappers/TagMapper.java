@@ -14,4 +14,5 @@ public interface TagMapper extends BaseMapper<Tag, TagDto> {
         tag.setAuthorId(createTagDto.getAuthorId());
         return tag;
     }
+    TagDto toDto(Tag tag);
 }

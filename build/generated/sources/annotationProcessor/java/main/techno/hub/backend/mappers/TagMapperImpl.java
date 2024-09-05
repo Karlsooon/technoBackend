@@ -9,8 +9,8 @@ import techno.hub.backend.entities.Tag;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-09-04T22:09:46+0500",
-    comments = "version: 1.5.3.Final, compiler: IncrementalProcessingEnvironment from gradle-language-java-8.2.1.jar, environment: Java 17.0.10 (BellSoft)"
+    date = "2024-09-05T19:06:40+0500",
+    comments = "version: 1.5.3.Final, compiler: IncrementalProcessingEnvironment from gradle-language-java-8.2.1.jar, environment: Java 17.0.12 (Eclipse Adoptium)"
 )
 @Component
 public class TagMapperImpl implements TagMapper {
@@ -23,18 +23,12 @@ public class TagMapperImpl implements TagMapper {
 
         Tag tag = new Tag();
 
-        return tag;
-    }
-
-    @Override
-    public TagDto toDto(Tag entity) {
-        if ( entity == null ) {
-            return null;
+        if ( dto.getId() != null ) {
+            tag.setId( dto.getId() );
         }
+        tag.setName( dto.getName() );
 
-        TagDto tagDto = new TagDto();
-
-        return tagDto;
+        return tag;
     }
 
     @Override
@@ -63,5 +57,19 @@ public class TagMapperImpl implements TagMapper {
         }
 
         return list;
+    }
+
+    @Override
+    public TagDto toDto(Tag tag) {
+        if ( tag == null ) {
+            return null;
+        }
+
+        TagDto tagDto = new TagDto();
+
+        tagDto.setId( tag.getId() );
+        tagDto.setName( tag.getName() );
+
+        return tagDto;
     }
 }
