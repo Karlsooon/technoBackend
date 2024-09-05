@@ -9,7 +9,7 @@ services:
       POSTGRES_PASSWORD: 123
       POSTGRES_DB: technoparkweb
     ports:
-      - "9001:5432"
+      - "8001:5432"
     volumes:
       - db-data:/var/lib/postgresql/data
     restart: unless-stopped
@@ -20,9 +20,9 @@ services:
     container_name: technoparkweb-app
     environment:
       DATABASE_DOMAIN: postgres
-      DATABASE_PORT: 5432
+      DATABASE_PORT: 8000
     ports:
-      - "9000:8080"
+      - "8000:8080"
     depends_on:
       - postgres
 volumes:
