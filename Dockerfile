@@ -13,4 +13,4 @@ RUN curl -s https://api.github.com/repos/Karlsooon/technoBackend/releases/latest
     | tr -d \" \
     | wget -qi -
 
-CMD ["java", "-jar", "fetcher.jar"]
+CMD ["java", "-jar", "technoApp.jar"]
