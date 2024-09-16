@@ -21,9 +21,6 @@ public class BlogDto {
     @JsonProperty("content")
     private String content;
 
-    @JsonProperty("author_id")
-    private String authorId;
-
     @JsonProperty("created_at")
     private LocalDateTime createdAt;
 

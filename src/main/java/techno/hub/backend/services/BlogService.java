@@ -12,7 +12,7 @@ public interface BlogService {
     BlogDto getBlogById(long id);
 
 
-    BlogDto saveBlog(BlogCreateRequestDto blog, MultipartFile file, String authorId);
+    BlogDto saveBlog(BlogCreateRequestDto blog, MultipartFile file);
 
     void deleteBlog(long id);
 

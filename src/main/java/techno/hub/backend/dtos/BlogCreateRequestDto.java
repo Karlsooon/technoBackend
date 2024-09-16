@@ -22,7 +22,4 @@ public class BlogCreateRequestDto {
     @JsonProperty("tags_ids")
     @Null
     private List<Long> tagsIds;
-
-    @JsonIgnore
-    private String authorId;
 }

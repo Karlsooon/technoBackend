@@ -47,8 +47,7 @@ public class BlogServiceImpl implements BlogService {
 
 
     @Override
-    public BlogDto saveBlog(BlogCreateRequestDto blogCreateRequestDto, MultipartFile file, String authorId) {
-        blogCreateRequestDto.setAuthorId(authorId);
+    public BlogDto saveBlog(BlogCreateRequestDto blogCreateRequestDto, MultipartFile file) {
         if (blogCreateRequestDto.getTagsIds() == null) blogCreateRequestDto.setTagsIds(new ArrayList<>());
         var entityToSave = blogCustomMapper.toEntity(blogCreateRequestDto);
         String fileName = storageService.store(file);

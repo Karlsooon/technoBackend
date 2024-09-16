@@ -16,7 +16,6 @@ public class BlogCustomMapper {
         Blog blog = new Blog();
         blog.setTitle(blogCreateRequestDto.getTitle());
         blog.setContent(blogCreateRequestDto.getContent());
-        blog.setAuthorId(blogCreateRequestDto.getAuthorId());
         var tags = tagRepository.findAllById(blogCreateRequestDto.getTagsIds());
         if(tags.size() != blogCreateRequestDto.getTagsIds().size())
             throw new IllegalArgumentException("Could not find all specified tags");

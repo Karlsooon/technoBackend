@@ -6,6 +6,4 @@ import lombok.Data;
 @Data
 public class CreateTagDto {
     private String name;
-    @JsonIgnore
-    private String authorId;
 }

@@ -11,7 +11,7 @@ import techno.hub.backend.entities.Tag;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-09-05T19:04:19+0500",
+    date = "2024-09-16T19:43:41+0500",
     comments = "version: 1.5.3.Final, compiler: IncrementalProcessingEnvironment from gradle-language-java-8.2.1.jar, environment: Java 17.0.12 (Eclipse Adoptium)"
 )
 @Component
@@ -28,13 +28,31 @@ public class BlogMapperImpl implements BlogMapper {
         blog.setId( dto.getId() );
         blog.setTitle( dto.getTitle() );
         blog.setContent( dto.getContent() );
-        blog.setAuthorId( dto.getAuthorId() );
         blog.setCreatedAt( dto.getCreatedAt() );
         blog.setUpdatedAt( dto.getUpdatedAt() );
         blog.setTags( tagDtoListToTagList( dto.getTags() ) );
         blog.setImageUrl( dto.getImageUrl() );
 
         return blog;
+    }
+
+    @Override
+    public BlogDto toDto(Blog entity) {
+        if ( entity == null ) {
+            return null;
+        }
+
+        BlogDto blogDto = new BlogDto();
+
+        blogDto.setId( entity.getId() );
+        blogDto.setTitle( entity.getTitle() );
+        blogDto.setContent( entity.getContent() );
+        blogDto.setCreatedAt( entity.getCreatedAt() );
+        blogDto.setUpdatedAt( entity.getUpdatedAt() );
+        blogDto.setTags( tagListToTagDtoList( entity.getTags() ) );
+        blogDto.setImageUrl( entity.getImageUrl() );
+
+        return blogDto;
     }
 
     @Override
@@ -63,26 +81,6 @@ public class BlogMapperImpl implements BlogMapper {
         }
 
         return list;
-    }
-
-    @Override
-    public BlogDto toDto(Blog blog) {
-        if ( blog == null ) {
-            return null;
-        }
-
-        BlogDto blogDto = new BlogDto();
-
-        blogDto.setId( blog.getId() );
-        blogDto.setTitle( blog.getTitle() );
-        blogDto.setContent( blog.getContent() );
-        blogDto.setAuthorId( blog.getAuthorId() );
-        blogDto.setCreatedAt( blog.getCreatedAt() );
-        blogDto.setUpdatedAt( blog.getUpdatedAt() );
-        blogDto.setTags( tagListToTagDtoList( blog.getTags() ) );
-        blogDto.setImageUrl( blog.getImageUrl() );
-
-        return blogDto;
     }
 
     protected Tag tagDtoToTag(TagDto tagDto) {

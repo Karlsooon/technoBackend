@@ -26,8 +26,6 @@ public class Blog {
     @Column(name = "content", nullable = false)
     private String content;
 
-    @Column(name = "author_id", nullable = false)
-    private String authorId;
 
     @Column(name = "created_at")
     private LocalDateTime createdAt;

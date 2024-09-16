@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:postgresql://${DATABASE_DOMAIN:localhost}:${DATABASE_PORT:9001}/${DATABASE_NAME:technoparkweb}
+    url: jdbc:postgresql://${DATABASE_DOMAIN:localhost}:${DATABASE_PORT:8001}/${DATABASE_NAME:technoparkweb}
     username: ${DATABASE_USERNAME:k_app}
     password: ${DATABASE_PASSWORD:123}
   jpa:

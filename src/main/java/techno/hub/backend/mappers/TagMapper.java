@@ -11,8 +11,6 @@ public interface TagMapper extends BaseMapper<Tag, TagDto> {
     default Tag toEntity(CreateTagDto createTagDto) {
         Tag tag = new Tag();
         tag.setName(createTagDto.getName());
-        tag.setAuthorId(createTagDto.getAuthorId());
         return tag;
     }
-    TagDto toDto(Tag tag);
 }
