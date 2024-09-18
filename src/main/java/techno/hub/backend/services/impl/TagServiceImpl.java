@@ -1,6 +1,5 @@
 package techno.hub.backend.services.impl;
 
-import techno.hub.backend.dtos.CreateTagDto;
 import techno.hub.backend.dtos.TagDto;
 import techno.hub.backend.entities.Blog;
 import techno.hub.backend.entities.Tag;
@@ -21,7 +20,7 @@ public class TagServiceImpl implements TagService {
     private final TagMapper tagMapper;
 
     public List<TagDto> findAll() {
-        return tagMapper.toDTO(tagRepository.findAll());
+        return tagMapper.toDtoList(tagRepository.findAll());
     }
 
 //    public TagDto getTagById(long id) {
@@ -48,7 +47,7 @@ public TagDto getTagById(long id) {
 //        return tagDto;
 //    }
 
-    public TagDto createTag(CreateTagDto tag) {
+    public TagDto createTag(TagDto tag) {
         if(tagRepository.existsByName(tag.getName())) throw new IllegalArgumentException("Field name must be unique");
         var savedEntity = tagRepository.save(tagMapper.toEntity(tag));
         return tagMapper.toDto(savedEntity);
@@ -70,7 +69,7 @@ public TagDto getTagById(long id) {
 //        return tags.stream()
 //                .map(TagDto::fromEntityWithBlogs)
 //                .collect(Collectors.toList());
-        return tagMapper.toDTO(tags);
+        return tagMapper.toDtoList(tags);
     }
 }
 

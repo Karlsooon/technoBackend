@@ -2,7 +2,6 @@ package techno.hub.backend.controllers;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.catalina.core.ApplicationContext;
-import techno.hub.backend.dtos.CreateTagDto;
 import techno.hub.backend.dtos.TagDto;
 import techno.hub.backend.services.TagService;
 import lombok.AllArgsConstructor;
@@ -39,7 +38,7 @@ public class TagController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<TagDto> createTag(@RequestBody CreateTagDto tag) {
+    public ResponseEntity<TagDto> createTag(@RequestBody TagDto tag) {
         var createdTag = tagService.createTag(tag);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdTag);
     }

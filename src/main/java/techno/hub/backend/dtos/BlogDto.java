@@ -12,8 +12,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class BlogDto {
-    @JsonProperty("id")
-    private Long id;
+
 
     @JsonProperty("title")
     private String title;

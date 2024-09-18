@@ -34,7 +34,7 @@ public class BlogServiceImpl implements BlogService {
     @Transactional
     public List<BlogDto> findAll() {
         List<Blog> blogs = blogRepository.findAll();
-        return blogMapper.toDTO(blogs);
+        return blogMapper.blogToDtoList(blogs);
     }
 
     @Override
@@ -42,7 +42,7 @@ public class BlogServiceImpl implements BlogService {
         var blog = blogRepository.findById(id)
                 .orElseThrow(() -> new DbObjectNotFoundException(HttpStatus.NOT_FOUND.toString(), "Blog doesn't exist"));
 
-        return blogMapper.toDto(blog);
+        return blogMapper.blogToDto(blog);
     }
 
 
@@ -54,7 +54,7 @@ public class BlogServiceImpl implements BlogService {
         entityToSave.setImageUrl(fileName);
         log.info("entityToSave: {}", entityToSave);
         var savedEntity = blogRepository.save(entityToSave);
-        return blogMapper.toDto(savedEntity);
+        return blogMapper.blogToDto(savedEntity);
     }
 
     @Override
@@ -85,7 +85,7 @@ public class BlogServiceImpl implements BlogService {
         if (!tagRepository.existsByName(tagName))
             throw new DbObjectNotFoundException(HttpStatus.NOT_FOUND.toString(), "Tag doesn't exits");
         var blogs = blogRepository.getBlogByTags_Name(tagName);
-        return blogMapper.toDTO(blogs);
+        return blogMapper.blogToDtoList(blogs);
     }
 
     @Override
