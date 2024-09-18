@@ -20,6 +20,5 @@ public class BlogCreateRequestDto {
     private String content;
 
     @JsonProperty("tags_ids")
-    @Null
     private List<Long> tagsIds;
 }

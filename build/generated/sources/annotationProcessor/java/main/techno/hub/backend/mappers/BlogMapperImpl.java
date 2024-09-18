@@ -11,7 +11,7 @@ import techno.hub.backend.entities.Tag;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-09-16T19:43:41+0500",
+    date = "2024-09-18T17:59:12+0500",
     comments = "version: 1.5.3.Final, compiler: IncrementalProcessingEnvironment from gradle-language-java-8.2.1.jar, environment: Java 17.0.12 (Eclipse Adoptium)"
 )
 @Component
@@ -37,6 +37,20 @@ public class BlogMapperImpl implements BlogMapper {
     }
 
     @Override
+    public List<Blog> toEntity(List<BlogDto> dtoList) {
+        if ( dtoList == null ) {
+            return null;
+        }
+
+        List<Blog> list = new ArrayList<Blog>( dtoList.size() );
+        for ( BlogDto blogDto : dtoList ) {
+            list.add( toEntity( blogDto ) );
+        }
+
+        return list;
+    }
+
+    @Override
     public BlogDto toDto(Blog entity) {
         if ( entity == null ) {
             return null;
@@ -53,20 +67,6 @@ public class BlogMapperImpl implements BlogMapper {
         blogDto.setImageUrl( entity.getImageUrl() );
 
         return blogDto;
-    }
-
-    @Override
-    public List<Blog> toEntity(List<BlogDto> dtoList) {
-        if ( dtoList == null ) {
-            return null;
-        }
-
-        List<Blog> list = new ArrayList<Blog>( dtoList.size() );
-        for ( BlogDto blogDto : dtoList ) {
-            list.add( toEntity( blogDto ) );
-        }
-
-        return list;
     }
 
     @Override

@@ -14,7 +14,3 @@ spring:
 application:
   title: Project By TechnoPark
   version: 1.0.0
-
-jwt:
-  secret: JkPAw6ID5jKiNA1jt+P5DKairwarWNwWMnfcN66ZpDdkeQLxC9d23zD83SDmDRbSObE0GjgDJuqdi8tARQK9Bw==
-  lifetime: 7200000

@@ -20,7 +20,7 @@ services:
     container_name: technoparkweb-app
     environment:
       DATABASE_DOMAIN: postgres
-      DATABASE_PORT: 8000
+      DATABASE_PORT: 5432
     ports:
       - "8000:8080"
     depends_on:
