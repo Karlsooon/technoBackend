@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import techno.hub.backend.dtos.BlogCreateRequestDto;
 import techno.hub.backend.dtos.BlogDto;
+import techno.hub.backend.dtos.BlogResponse;
+import techno.hub.backend.entities.Blog;
 import techno.hub.backend.services.BlogService;
 import techno.hub.backend.services.StorageService;
 
@@ -20,12 +22,13 @@ import java.util.List;
 @RequestMapping("/blogs")
 @AllArgsConstructor
 @Slf4j
+@CrossOrigin("*")
 public class BlogController {
 
     private final BlogService blogService;
 
     @GetMapping("/all")
-    public ResponseEntity<List<BlogDto>> getAllPosts() {
+    public ResponseEntity<List<BlogResponse>> getAllPosts() {
         log.info("Entering getAllPosts method");
         var result = blogService.findAll();
         log.info("Exiting getAllPosts method with result: {}", result);
@@ -33,7 +36,7 @@ public class BlogController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<BlogDto> getPostById(@PathVariable Long id) {
+    public ResponseEntity<BlogResponse> getPostById(@PathVariable Long id) {
         log.info("Fetching blog with ID: {}", id);
         var result = blogService.getBlogById(id);
         log.info("Result: {}", result);
@@ -63,8 +66,8 @@ public class BlogController {
     }
 
     @GetMapping("/get-by-tag/{tag-name}")
-    public ResponseEntity<List<BlogDto>> getBlogsByTagName(@PathVariable("tag-name") String tagName) {
-        List<BlogDto> blogs = blogService.getBlogsByTagName(tagName);
+    public ResponseEntity<List<BlogResponse>> getBlogsByTagName(@PathVariable("tag-name") String tagName) {
+        List<BlogResponse> blogs = blogService.getBlogsByTagName(tagName);
         return ResponseEntity.ok(blogs);
     }
 

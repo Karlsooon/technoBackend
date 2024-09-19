@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import techno.hub.backend.dtos.BlogCreateRequestDto;
 import techno.hub.backend.dtos.BlogDto;
+import techno.hub.backend.dtos.BlogResponse;
 import techno.hub.backend.entities.Blog;
 import techno.hub.backend.exceptions.DbObjectNotFoundException;
 import techno.hub.backend.mappers.BlogMapper;
@@ -32,17 +33,17 @@ public class BlogServiceImpl implements BlogService {
 
     @Override
     @Transactional
-    public List<BlogDto> findAll() {
+    public List<BlogResponse> findAll() {
         List<Blog> blogs = blogRepository.findAll();
-        return blogMapper.blogToDtoList(blogs);
+        return blogMapper.toDtoListWithIds(blogs);
     }
 
     @Override
-    public BlogDto getBlogById(long id) {
+    public BlogResponse getBlogById(long id) {
         var blog = blogRepository.findById(id)
                 .orElseThrow(() -> new DbObjectNotFoundException(HttpStatus.NOT_FOUND.toString(), "Blog doesn't exist"));
 
-        return blogMapper.blogToDto(blog);
+        return blogMapper.toDtoWithId(blog);
     }
 
 
@@ -81,11 +82,11 @@ public class BlogServiceImpl implements BlogService {
     }
 
     @Override
-    public List<BlogDto> getBlogsByTagName(String tagName) {
+    public List<BlogResponse> getBlogsByTagName(String tagName) {
         if (!tagRepository.existsByName(tagName))
             throw new DbObjectNotFoundException(HttpStatus.NOT_FOUND.toString(), "Tag doesn't exits");
         var blogs = blogRepository.getBlogByTags_Name(tagName);
-        return blogMapper.blogToDtoList(blogs);
+        return blogMapper.toDtoListWithIds(blogs);
     }
 
     @Override

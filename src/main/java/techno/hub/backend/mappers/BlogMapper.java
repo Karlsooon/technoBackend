@@ -2,7 +2,9 @@ package techno.hub.backend.mappers;
 
 import org.springframework.stereotype.Component;
 import techno.hub.backend.dtos.BlogDto;
+import techno.hub.backend.dtos.BlogResponse;
 import techno.hub.backend.dtos.TagDto;
+import techno.hub.backend.dtos.TagResponse;
 import techno.hub.backend.entities.Blog;
 import techno.hub.backend.entities.Tag;
 
@@ -81,6 +83,39 @@ public class BlogMapper {
                 .map(this::blogToDto)
                 .collect(Collectors.toList());
     }
+
+    public static BlogResponse toDtoWithId(Blog blog) {
+        if (blog == null) {
+            return null;
+        }
+
+        BlogResponse dto = new BlogResponse();
+        dto.setId(blog.getId());
+        dto.setTitle(blog.getTitle());
+        dto.setContent(blog.getContent());
+        dto.setCreatedAt(blog.getCreatedAt());
+        dto.setUpdatedAt(blog.getUpdatedAt());
+        dto.setImageUrl(blog.getImageUrl());
+
+        if (blog.getTags() != null) {
+            List<TagResponse> tagDtos = blog.getTags()
+                    .stream()
+                    .map(TagMapper::toDtoWithId)
+                    .collect(Collectors.toList());
+            dto.setTags(tagDtos);
+        }
+
+        return dto;
+    }
+    public static List<BlogResponse> toDtoListWithIds(List<Blog> blogs) {
+        if (blogs == null) {
+            return null;
+        }
+        return blogs.stream()
+                .map(BlogMapper::toDtoWithId)
+                .collect(Collectors.toList());
+    }
+
 
     // Convert List<BlogDto> to List<Blog>
     public List<Blog> dtoToBlogList(List<BlogDto> blogDtos) {

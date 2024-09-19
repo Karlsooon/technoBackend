@@ -1,6 +1,7 @@
 package techno.hub.backend.services.impl;
 
 import techno.hub.backend.dtos.TagDto;
+import techno.hub.backend.dtos.TagResponse;
 import techno.hub.backend.entities.Blog;
 import techno.hub.backend.entities.Tag;
 import techno.hub.backend.mappers.TagMapper;
@@ -19,8 +20,8 @@ public class TagServiceImpl implements TagService {
     private final TagRepository tagRepository;
     private final TagMapper tagMapper;
 
-    public List<TagDto> findAll() {
-        return tagMapper.toDtoList(tagRepository.findAll());
+    public List<TagResponse> findAll() {
+        return tagMapper.toDtoListWithId(tagRepository.findAll());
     }
 
 //    public TagDto getTagById(long id) {
@@ -29,12 +30,12 @@ public class TagServiceImpl implements TagService {
 //    }
 @Override
 @Transactional()
-public TagDto getTagById(long id) {
+public TagResponse getTagById(long id) {
     Tag tag = tagRepository.findById(id)
             .orElseThrow(() -> new EmptyResultDataAccessException("Tag not found with ID: " + id,1  ));
 
 //    return mapToDto(tag);
-    return tagMapper.toDto(tag);
+    return tagMapper.toDtoWithId(tag);
 }
 
 //    private TagDto mapToDto(Tag tag) {
@@ -64,12 +65,12 @@ public TagDto getTagById(long id) {
 
         tagRepository.delete(tagToDelete);
     }
-    public List<TagDto> getAllTagsWithBlogs() {
+    public List<TagResponse> getAllTagsWithBlogs() {
         List<Tag> tags = tagRepository.findAll();
 //        return tags.stream()
 //                .map(TagDto::fromEntityWithBlogs)
 //                .collect(Collectors.toList());
-        return tagMapper.toDtoList(tags);
+        return tagMapper.toDtoListWithId(tags);
     }
 }
 

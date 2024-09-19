@@ -11,23 +11,20 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class BlogDto {
+public class BlogResponse {
 
-    @JsonProperty("title")
+    private Long id;
+
     private String title;
 
-    @JsonProperty("content")
     private String content;
 
-    @JsonProperty("created_at")
     private LocalDateTime createdAt;
 
-    @JsonProperty("updated_at")
     private LocalDateTime updatedAt;
 
-    @JsonProperty("tags")
-    private List<TagDto> tags;
+    private List<TagResponse> tags;
 
-    @JsonProperty("image_url")
     private String imageUrl;
+
 }

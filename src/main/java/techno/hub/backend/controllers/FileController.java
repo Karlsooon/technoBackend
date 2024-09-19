@@ -21,6 +21,7 @@ import java.nio.file.Files;
 @Controller
 @RequestMapping("/files")
 @AllArgsConstructor
+@CrossOrigin("*")
 public class FileController {
 
     private final StorageService storageService;
