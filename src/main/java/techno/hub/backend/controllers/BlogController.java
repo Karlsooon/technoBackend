@@ -6,6 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import techno.hub.backend.dtos.BlogCreateRequestDto;
@@ -44,6 +45,7 @@ public class BlogController {
     }
 
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping(value = "/create", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<BlogDto> createBlog(@Valid final BlogCreateRequestDto model, @RequestPart(name = "file") MultipartFile file) {
 
@@ -53,6 +55,7 @@ public class BlogController {
     }
 
 
+    @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
     @PostMapping("/{id}/add-tag")
     public ResponseEntity<Void> addTagToBlog(@PathVariable Long id, @RequestParam List<Long> tagIds) {
         if (tagIds.isEmpty()) throw new IllegalArgumentException("List of tag's id is empty");
@@ -60,6 +63,7 @@ public class BlogController {
         return ResponseEntity.ok().build();
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @DeleteMapping("/delete/{id}")
     public void deletePost(@PathVariable long id) {
         blogService.deleteBlog(id);
@@ -71,6 +75,7 @@ public class BlogController {
         return ResponseEntity.ok(blogs);
     }
 
+    @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
     @DeleteMapping("/{blog-id}/remove-tag/{tag-id}")
     public ResponseEntity<String> deleteTagFromBlog(
             @PathVariable("blog-id") long blogId,
