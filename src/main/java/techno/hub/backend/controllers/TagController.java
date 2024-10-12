@@ -2,6 +2,7 @@ package techno.hub.backend.controllers;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.catalina.core.ApplicationContext;
+import org.springframework.security.access.prepost.PreAuthorize;
 import techno.hub.backend.dtos.TagDto;
 import techno.hub.backend.dtos.TagResponse;
 import techno.hub.backend.entities.Tag;
@@ -40,12 +41,14 @@ public class TagController {
         return ResponseEntity.ok(result);
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping("/create")
     public ResponseEntity<TagDto> createTag(@RequestBody TagDto tag) {
         var createdTag = tagService.createTag(tag);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdTag);
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @DeleteMapping("/delete/{id}")
     public void deleteTag(@PathVariable long id) {
         tagService.deleteTag(id);

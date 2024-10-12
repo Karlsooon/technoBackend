@@ -47,10 +47,20 @@ dependencies {
 	annotationProcessor("org.projectlombok:lombok")
 
 
-	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
-
 	implementation("commons-io:commons-io:2.7")
 	implementation(kotlin("stdlib-jdk8"))
+
+
+	// security dependents , own add
+	implementation("org.springframework.boot:spring-boot-starter-security")
+
+	implementation ("com.auth0:java-jwt:4.2.1")
+	implementation ("org.modelmapper:modelmapper:3.1.1")
+
+//	implementation ("com.h2database:h2:2.1.214")
+	implementation ("com.h2database:h2")
+//	implementation ("io.springfox:springfox-boot-starter")
+
 }
 kotlin {
 	jvmToolchain(17)
