@@ -51,7 +51,7 @@ dependencies {
 	implementation(kotlin("stdlib-jdk8"))
 
 
-	// security dependents , own add
+	// security dependents , own add, swagger, h2 database
 	implementation("org.springframework.boot:spring-boot-starter-security")
 
 	implementation ("com.auth0:java-jwt:4.2.1")
