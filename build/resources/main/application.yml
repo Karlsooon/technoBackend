@@ -34,10 +34,10 @@ spring:
       enabled: true
       path: /h2-console
 
-#  servlet:
-#    multipart:
-#      max-file-size: 100MB
-#      max-request-size: 100MB
+  servlet:
+    multipart:
+      max-file-size: 100MB
+      max-request-size: 100MB
 
 application:
   title: Project By TechnoPark
@@ -53,5 +53,3 @@ logging:
   file:
     name: logs/app.log
 
-#server:
-#  port: 8082
