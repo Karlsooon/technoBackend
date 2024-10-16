@@ -65,3 +65,7 @@ dependencies {
 kotlin {
 	jvmToolchain(17)
 }
+
+tasks.bootJar {
+	launchScript()
+}
