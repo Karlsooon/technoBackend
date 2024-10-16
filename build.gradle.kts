@@ -51,15 +51,15 @@ dependencies {
 	implementation(kotlin("stdlib-jdk8"))
 
 
-	// security dependents , own add
+	// security dependents , own add, swagger, h2 database
 	implementation("org.springframework.boot:spring-boot-starter-security")
 
 	implementation ("com.auth0:java-jwt:4.2.1")
 	implementation ("org.modelmapper:modelmapper:3.1.1")
 
-//	implementation ("com.h2database:h2:2.1.214")
 	implementation ("com.h2database:h2")
-//	implementation ("io.springfox:springfox-boot-starter")
+	implementation ("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.2.0")
+
 
 }
 kotlin {
